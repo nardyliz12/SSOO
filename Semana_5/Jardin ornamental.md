@@ -42,7 +42,7 @@ int main() {
 
     // Esperar a que ambos hilos terminen
     pthread_join(torniquete1, NULL);
-    pthread_join(torniquete2, NULL);
+    pthread_jo(torniquete2, NULL);
 
     // Verificar el resultado
     printf("\nVisitantes totales: %d (esperado: %d)\n", visitantes, TOTAL_VISITANTES);
@@ -57,3 +57,32 @@ int main() {
 }
 ```
 
+### Pasos principales:
+
+- Inicializa un contador global visitantes = 0 para contar a las personas.
+
+- Crea dos hilos (torniquete1 y torniquete2), cada uno ejecutando la función torniquete().
+
+#### Cada hilo:
+
+- Simula el paso de 20 visitantes.
+
+#### Por cada visitante:
+
+- Espera un tiempo aleatorio breve (usleep()), para imitar la llegada aleatoria.
+
+- Bloquea el contador (pthread_mutex_lock) para incrementar el número de visitantes de manera segura (sin errores por ejecución simultánea).
+
+- Desbloquea el contador (pthread_mutex_unlock) después de actualizar.
+
+- Imprime el avance del conteo.
+
+- El programa espera (pthread_join) a que ambos hilos terminen.
+
+- Al final, verifica si el total de visitantes es el esperado (40) y muestra un mensaje si fue correcto o hubo error.
+
+#### ¿Por qué se usa mutex?
+
+- Para evitar problemas de concurrencia, ya que ambos torniquetes podrían intentar modificar visitantes al mismo tiempo.
+
+- Mutex garantiza que solo un torniquete a la vez pueda cambiar el valor del contador.
