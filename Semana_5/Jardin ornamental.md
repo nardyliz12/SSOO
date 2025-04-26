@@ -5,7 +5,7 @@ El problema en general nos ayuda a aprender la sincronización de concurrencia y
 Para resolver este problema, necesitamos contar de manera segura el número total de visitantes que ingresan al jardín a través de dos torniquetes independientes, evitando condiciones de carrera (race conditions). Usaremos mutex para garantizar que el coteo sea correcto.
 
 ## Implementación en lenguaje C:
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
